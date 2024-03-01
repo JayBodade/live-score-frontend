@@ -18,7 +18,7 @@ const UserView = () => {
  
 
   const getMatchDataFromDB = async () => {
-
+      setLoading(true);
     const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
     const response = await fetch(`${apiUrl}/getMatchData`, {
       method: 'GET',
@@ -41,7 +41,7 @@ const UserView = () => {
       localStorage.removeItem('matchId');
     }
 
-
+   setLoading(false);
   }
 
 
