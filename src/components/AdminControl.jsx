@@ -183,7 +183,7 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
                 <div className='mt-2 -mb-3 w-20 ' style={{ marginLeft: currentBall * moveValue + 'px' }}>
                     <span  >run scored</span>
                 </div>
-                <div className={`control-container 300:mt-1 350:w-[50%] flex 300:w-[50%] 320:mt-3 sm:mt-5  transition-all lg:w-[33%] xl:w-[33%]  375:w-[60%] 390:w-[65%] 425:w-[60%] 585:w-[45%] 608:w-[40%]  500:w-[50%] flex-wrap h-fit 300:py-2  mt-10 sm:w-[40%] sm:-ml-2 justify-items-end px-4 border-dashed border-2 border-red-400`} style={{ marginLeft: currentBall * moveValue + 'px' }} >
+                <div className={`control-container 300:mt-1 350:w-[50%] flex 300:w-[50%] 320:mt-3 sm:mt-5 560:w-[40%]  transition-all lg:w-[33%] xl:w-[33%]  375:w-[60%] 390:w-[65%] 425:w-[60%] 585:w-[45%] 608:w-[40%]  500:w-[50%] flex-wrap h-fit 300:py-2  mt-10 sm:w-[40%] sm:-ml-2 justify-items-end px-4 border-dashed border-2 border-red-400`} style={{ marginLeft: currentBall * moveValue + 'px' }} >
 
 
                     {op.map((value) => {
