@@ -143,7 +143,7 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
                 <span className='heading-content left-0'>This Over</span>
             </div>
             <div className="border-dashed h-16 border-4 sm:w-[96%] 300:w-[100%] mx-auto rounded-lg border-gray-300 -z-10 p-4 relative">
-  <span className='absolute ml-[50%] sm:ml-[15%]  300:ml-9 300:text-sm  w-[100px] md:ml-[20%] sm:text-sm lg:ml-[25%] xl:ml-[30%] 2xl:ml-[40%] text-gray-700 text-lg -mt-[33px]'>next over</span>
+  <span className='absolute ml-[50%] sm:ml-[15%]  300:ml-9 300:text-sm  w-[100px] md:ml-[20%] sm:text-sm lg:ml-[25%] xl:ml-[30%] 2xl:ml-[40%] text-gray-700 text-lg  w-fit -mt-[31px]  bg-white'>next over</span>
   <img src="./grayarrow.jpb-removebg-preview.png" className='w-8 z-1 h-8 lg:ml-2 xl:ml-3 m:w-6 sm:h-6 sm:-ml-2 sm:mt-[29px] mt-[26px] ml-2 text-gray' alt="" />
 
 </div>
