@@ -68,10 +68,11 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
         const value = boundingRect.width;
 
         if (200 < value && value < 300) {
-            setMoveValue(10);
+            setMoveValue(prev => 10);
         }
         if (301 < value && value < 340) {
-            setMoveValue(20);
+            
+            setMoveValue(prev => 20);
 
         }
         if (340 < value && value < 400) {
@@ -95,15 +96,21 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
         }
         if (900 < value && value < 1100) {
             setMoveValue(130);
+           
         }
         if (1100 < value && value < 1500) {
             setMoveValue(120);
         }
 
+        console.log(moveValue);
+
     }
 
 
     const handleRunsOrWickets = (value) => {
+
+        const boundingRect = myElementRef.current.getBoundingClientRect();
+        const widthValue= boundingRect.width;
 
         updateMoveValue();
         let matchId = localStorage.getItem('matchId');
@@ -114,12 +121,12 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
                 setOverValue({ 0: '', 1: '', 2: '', 3: '', 4: '', 5: '' });
             }, 700)
 
-            socket.emit('publishscore', { currentBall, value, overFinished: true, moveValue, runs, wickets, matchId, overNo });
+            socket.emit('publishscore', { currentBall, value, overFinished: true, widthValue, moveValue, runs, wickets, matchId, overNo });
 
         } else {
             setCurrentBall(prev => prev + 1);
             updateState(value);
-            socket.emit('publishscore', { currentBall, value, overFinished: false, moveValue, runs, wickets, matchId, overNo });
+            socket.emit('publishscore', { currentBall, value, overFinished: false, moveValue,widthValue, runs, wickets, matchId, overNo });
 
         }  
 
@@ -142,8 +149,8 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
             <div className='heading 375:w-32  300:w-28 mb-3  h-fit 375:text-xl 300:p-0 300:text-lg font-bold ' >
                 <span className='heading-content left-0'>This Over</span>
             </div>
-            <div className="border-dashed h-16 border-4 sm:w-[96%] 300:w-[100%] mx-auto rounded-lg border-gray-300 -z-10 p-4 relative">
-  <span className='absolute ml-[50%] sm:ml-[15%]  300:ml-9 300:text-sm  w-[100px] md:ml-[20%] sm:text-sm lg:ml-[25%] xl:ml-[30%] 2xl:ml-[40%] text-gray-700 text-lg  w-fit -mt-[31px]  bg-white'>next over</span>
+            <div className="border-dashed  h-16 border-4 sm:w-[96%] 300:w-[100%] mx-auto rounded-lg border-gray-300 -z-10 p-4 relative">
+  <span className='absolute ml-[50%] sm:ml-[15%]  300:ml-9 300:text-sm  md:ml-[20%] sm:text-sm lg:ml-[25%] xl:ml-[30%] 2xl:ml-[40%] text-gray-700 text-lg  w-fit -mt-[31px]  bg-white'>next over</span>
   <img src="./grayarrow.jpb-removebg-preview.png" className='w-8 z-1 h-8 lg:ml-2 xl:ml-3 m:w-6 sm:h-6 sm:-ml-2 sm:mt-[29px] mt-[26px] ml-2 text-gray' alt="" />
 
 </div>
@@ -183,17 +190,17 @@ const AdminControl = ({ setCurrentBall, lastThreeOvers, setLastThreeOvers, setWi
                 <div className='mt-2 -mb-3 300:ml-10 w-[50%] ' style={{ marginLeft: currentBall * moveValue + 'px' }}>
                     <span className='sm:text-sm ml-10  300:text-xs  md:text-lg 300:ml-6' >run scored</span>
                 </div>
-                <div className={`control-container 300:mt-1 350:w-[50%] flex 300:w-[50%] 320:mt-3 sm:mt-5 560:w-[40%]  transition-all lg:w-[33%] xl:w-[33%]  375:w-[60%] 390:w-[65%] 425:w-[60%] 585:w-[45%] 608:w-[40%]  500:w-[50%] flex-wrap h-fit 300:py-2  mt-10 sm:w-[40%] sm:-ml-2 justify-items-end px-4 border-dashed border-2 border-red-400`} style={{ marginLeft: currentBall * moveValue + 'px' }} >
+                <div className={`control-container 300:mt-1 350:w-[50%] flex 300:w-[50%] 320:mt-3 sm:mt-5  transition-all lg:w-[33%] xl:w-[33%]  375:w-[60%] 390:w-[65%] 425:w-[60%] 585:w-[45%] 608:w-[40%] 560:w-[40%] 500:w-[50%] flex-wrap h-fit 300:py-2  mt-10 sm:w-[40%] sm:-ml-2   justify-items-end px-4 border-dashed border-2 border-red-400`} style={{ marginLeft: currentBall * moveValue + 'px' }} >
 
 
-                    {op.map((value) => {
+                    {op.map((value,index) => {
                        
-                    let color = colors[value].color;
-                    let textColor = colors[value].text;
+                    let color = value !== 'abc' ? colors[value].color : '';
+                    let textColor = value !== 'abc' ? colors[value].text : '';
                    
                         return <button disabled={wickets == 10}
                             key={value}
-                            className={`flex bg-gray-500  items-center text-${textColor} mx-auto justify-center mb-2 w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 border border-black rounded-full focus:outline-none 0`}
+                            className={`flex bg-gray-500  items-center text-${textColor} mx-auto justify-center mb-2 w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 border  border-black rounded-full focus:outline-none 0`}
                             onClick={() => handleRunsOrWickets(value)}
                             style={{
                                 backgroundColor:color,
